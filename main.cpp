@@ -15,7 +15,6 @@ char c_input[SIZE];
 int main() {
   bool play = true;
   while(play) {
-    
     cout << "Enter what you want to do: (GRAB, MOVE, or QUIT)" << endl;
     cin >> c_input;
     if(strcmp(c_input, "GRAB") == 0) {
