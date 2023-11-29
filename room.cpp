@@ -51,4 +51,5 @@ Item* Room::Pickup(const char* itemName) {
     }
   }
   return nullptr; // Return nullptr if the item is not found
+  // https://www.geeksforgeeks.org/understanding-nullptr-c/
 }
