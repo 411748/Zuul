@@ -3,9 +3,9 @@
 
 #include <iostream>
 #include <cstring>
-#include "room.h"
 #include <vector>
 #include <map>
+#include "item.h"
 
 using namespace std;
 
@@ -19,6 +19,7 @@ public:
   void printinfo();
   bool item_pres(const char* itemName);
   Item* Pickup(const char* itemName);
+
 private:
   const char* info;
   map<const char*, Room*> exits;
@@ -26,4 +27,5 @@ private:
 };
 
 #endif
+
 
