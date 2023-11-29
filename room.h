@@ -19,7 +19,7 @@ public:
   void printinfo();
   bool item_pres(const char* itemName);
   Item* Pickup(const char* itemName);
-
+  Room*getExit(char* in);
 private:
   const char* info;
   map<const char*, Room*> exits;

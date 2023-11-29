@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include "room.h"
-
+//Worked together with ghazi for a lot of room code
 using namespace std;
 
 Room::Room(const char* info) : info(info) {}
@@ -21,7 +21,9 @@ void Room::printinfo() {
   cout << "You are currently in: " << info << endl;
   cout << "You can move in these directions: " << endl;
   for (auto it = exits.begin(); it != exits.end(); ++it) {
-    cout << it->first << endl;
+    if(it->second != NULL) {
+      cout << it->first << endl;
+    }
   }
   if (!items.empty()) {
     cout << "The items you can pick up are: " << endl;
@@ -40,6 +42,24 @@ bool Room::item_pres(const char* itemName) {
     }
   }
   return false;
+}
+
+Room* Room::getExit(char* in) {
+  if(strcmp(in, "North") == 0) {
+    return exits["North"];
+  }
+  else if(strcmp(in, "East") == 00) {
+    return exits["East"];
+  }
+  else if(strcmp(in, "South") == 0) {
+    return exits["South"];
+  }
+  else if(strcmp(in, "West") == 0) {
+    return exits["West"];
+  }
+  else {
+    return NULL;
+  }
 }
 
 Item* Room::Pickup(const char* itemName) {
