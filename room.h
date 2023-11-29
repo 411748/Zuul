@@ -1,6 +1,8 @@
+//code for room.h
 #ifndef ROOM
 #define ROOM
 
+///adding my includes
 #include <iostream>
 #include <cstring>
 #include <vector>
@@ -10,7 +12,7 @@
 using namespace std;
 
 class Item;
-
+//class for room
 class Room {
 public:
   Room(const char* info);

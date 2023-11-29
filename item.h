@@ -1,6 +1,7 @@
+//code for item.h
 #ifndef ITEM
 #define ITEM
-
+//adding includes
 #include <iostream>
 #include <cstring>
 

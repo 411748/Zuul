@@ -1,3 +1,5 @@
+//code for room.cpp
+//adding all my includes
 #include <iostream>
 #include <cstring>
 #include "room.h"
@@ -5,18 +7,18 @@
 using namespace std;
 
 Room::Room(const char* info) : info(info) {}
-
+//Exit function
 void Room::Exits(Room* North, Room* East, Room* South, Room* West) {
   exits["North"] = North;
   exits["East"] = East;
   exits["South"] = South;
   exits["West"] = West;
 }
-
+//Adding items to specific rooms
 void Room::Items(Item* item) {
   items.push_back(item);
 }
-
+//print function
 void Room::printinfo() {
   cout << "You are currently in: " << info << endl;
   cout << "You can move in these directions: " << endl;
@@ -34,7 +36,7 @@ void Room::printinfo() {
     cout << "There are no items for you to pick up in this room" << endl;
   }
 }
-
+//checking if items are present function
 bool Room::item_pres(const char* itemName) {
   for (auto it = items.begin(); it != items.end(); ++it) {
     if (strcmp((*it)->getName(), itemName) == 0) {
@@ -43,7 +45,7 @@ bool Room::item_pres(const char* itemName) {
   }
   return false;
 }
-
+//Finding if exit is true for that specific room
 Room* Room::getExit(char* in) {
   if(strcmp(in, "North") == 0) {
     return exits["North"];

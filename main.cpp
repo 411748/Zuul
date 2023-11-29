@@ -1,3 +1,8 @@
+//Nick Braun
+//11/29/2023
+//Zuul - Objective is to find and grab all 5 items while moving through different rooms
+
+//Includes
 #include <iostream>
 #include <cstring>
 #include "room.h"
@@ -10,10 +15,15 @@
 
 using namespace std;
 
+//For all chars
 const int SIZE = 200;
 char c_input[SIZE];
+//Main function
 int main() {
+  //Keep playing until won or quit
   bool play = true;
+
+  //Adding and descriving all 15 rooms
   char* first_bath_desc = new char[SIZE];
   strcpy(first_bath_desc, "First Bathroom: Very cool place to be. Only the parents of this house should really be here.");
   Room* First_Bathroom = new Room(first_bath_desc);
@@ -59,7 +69,8 @@ int main() {
   char* pat_desc = new char[SIZE];
   strcpy(pat_desc, "Patio: This is basically just an extention to their deck.");
   Room* Patio = new Room(pat_desc);
-  
+
+  //Setting the exits for these rooms
   First_Bathroom->Exits(NULL, First_Bedroom, NULL, NULL);
   First_Bedroom->Exits(First_Hallway, NULL, NULL, First_Bathroom);
   First_Hallway->Exits(Second_Bedroom, Living_Room, First_Bedroom, NULL);
@@ -76,6 +87,7 @@ int main() {
   Garden->Exits(NULL, NULL, NULL, Deck);
   Patio->Exits(Deck, NULL, NULL, NULL);
 
+  //Adding and naming all 5 items
   char* book_p = new char[SIZE];
   strcpy(book_p, "BOOK");
   Item* book = new Item(book_p);
@@ -92,24 +104,30 @@ int main() {
   strcpy(carrot_p, "CARROT");
   Item* carrot = new Item(carrot_p);
 
+  //Setting items in specific rooms
   Second_Bedroom->Items(book);
   Second_Bathroom->Items(soap);
   Family_Room->Items(board_game);
   Kitchen->Items(knife);
   Garden->Items(carrot);
 
+  //Starting inventory and starting room
   vector<Item*> playerInventory;
   Room* currentRoom = Living_Room;
   
-  
+  //Playing loop
   while(play) {
+    //Showing room info and if item there or not
     currentRoom->printinfo();
+    //Finding what user wants to do
     cout << "Enter what you want to do: (GRAB, MOVE, or QUIT)" << endl;
     cin >> c_input;
+    //User wants to grab
     if(strcmp(c_input, "GRAB") == 0) {
       char itemGrab[SIZE];
       cout << "Enter the name of the item you wish to grab: " << endl;
       cin >> itemGrab;
+      //Finding item and adding to inventory
       if(currentRoom->item_pres(itemGrab)) {
 	Item* grabbedItem = currentRoom->Pickup(itemGrab);
 	playerInventory.push_back(grabbedItem);
@@ -120,22 +138,27 @@ int main() {
 	  play = false;
 	}
       }
+      //Item doesnt match
       else {
 	cout << "There is no item with that name in this room, maybe you spell it wrong. " << endl;
       }
     }
+    //User wants to move
     else if(strcmp(c_input, "MOVE") == 0) {
       char direction[SIZE];
       cout << "Enter what direction you want to move (North, East, South, West): " << endl;
       cin >> direction;
+      //Making sure players direction is a valid move
       if (currentRoom->getExit(direction) != NULL) {
 	currentRoom = currentRoom->getExit(direction);
-	cout << "You move this direction: " << direction << endl;
+	cout << "You moved this direction: " << direction << endl;
       }
+      //Not valid
       else {
 	cout << "This direction is not valid. Try again(check spelling)" << endl;
       }
     }
+    //User wants to quit
     else if(strcmp(c_input, "QUIT") == 0) {
       play = false;
     }
