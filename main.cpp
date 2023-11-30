@@ -162,5 +162,21 @@ int main() {
     else if(strcmp(c_input, "QUIT") == 0) {
       play = false;
     }
+    else if(strcmp(c_input, "DROP") == 0) {
+      cout << "What item do you want to drop?" << endl;
+      char* drop_item = new char[SIZE];
+      char drop_item_input[SIZE];
+      cin >> drop_item_input;
+      strcpy(drop_item, drop_item_input);
+      for(auto it = playerInventory.begin(); it != playerInventory.end(); ++it) {
+        if(strcmp((*it)->getName(), drop_item) == 0) {
+          Item *item = *it;
+          playerInventory.erase(it);
+          currentRoom->Items(*it);
+          cout << "You dropped: " << drop_item << endl;
+          break;
+        }
+      }
+    }
   }
 }
